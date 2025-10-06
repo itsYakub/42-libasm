@@ -9,17 +9,16 @@ ft_strcpy:
 	push rbp
 	mov rbp, rsp
 
-	mov rax, 0
+	mov rax, 0					; register size_t i = 0
 .L2:
-	mov rbx, qword [rsi + rax]
-	mov qword [rdi + rax], rbx
+	mov rbx, qword [rsi + rax]	; *(src + i)
+	mov qword [rdi + rax], rbx	; *(dst + i)
 
-	inc rax
-	cmp byte [rsi + rax], 0
+	inc rax						; i++;
+	cmp byte [rsi + rax], 0		; while (*(src + i))
 	jne .L2
 
-	; return the 'dest' pointer
-	mov rax, rdi
+	mov rax, rdi				; return (dst);
 
 	; stack dispose
 	pop rbp

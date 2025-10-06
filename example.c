@@ -12,7 +12,7 @@ extern char *ft_strdup(const char *s);
 int main(void) {
 	printf("----\n");
 
-	/* ft_strcpy
+	/* ft_strlen
 	 * */
 	{
 		printf("strlen: %zu\n", strlen("Hello, world!"));
@@ -21,7 +21,7 @@ int main(void) {
 
 	printf("----\n");
 
-	/* ft_strpy
+	/* ft_strcpy
 	 * */
 	{
 		const char	src0[16] = "Hello, world!",
@@ -34,5 +34,18 @@ int main(void) {
 	}
 	
 	printf("----\n");
+	
+	/* ft_strcmp
+	 * */
+	{
+		const char	s1[16] = "Hello, Word!",
+					s2[16] = "Hello, world!";
 
+		printf("strcmp(s1, s2) = %i\n", strcmp(s1, s2));
+		printf("ft_strcmp(s1, s2) = %i\n", ft_strcmp(s1, s2));
+	}
+	
+	printf("----\n");
+	
+	return (0);
 }
