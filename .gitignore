@@ -1,0 +1,15 @@
+# binary
+
+*.a
+*.so
+*.o
+*.obj
+*.out
+*.elf
+*.exe
+*.app
+
+# editor files
+
+*.swp
+*.swo
