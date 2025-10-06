@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -85,5 +86,18 @@ int main(void) {
 		printf("result of ft_read(): %s", buf1);
 	}
 	
+	printf("----\n");
+
+	/* ft_strdup
+	 * */
+	{
+		const char	*s1 = "Hello, world!";
+		char		*s2;
+
+		s2 = strdup(s1);
+		printf("strdup(): %s\n", s2), free(s2);
+		s2 = ft_strdup(s1);
+		printf("ft_strdup(): %s\n", s2), free(s2);
+	}
 	return (0);
 }
