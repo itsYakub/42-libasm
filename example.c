@@ -1,6 +1,12 @@
+/* TODO(@joleksia):
+ * - [ ] finish all the functions;
+ * - [ ] setup errno
+ * */
+
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
+#include <unistd.h>
 
 extern size_t ft_strlen(const char *s);
 extern char *ft_strcpy(char *dest, const char *src);
@@ -46,6 +52,38 @@ int main(void) {
 	}
 	
 	printf("----\n");
+	
+	/* ft_write
+	 * */
+	{
+		int result0,
+			result1;
+
+		result0 = write(1, "write(): Hello, world!\n", 32);
+		result1 = ft_write(1, "ft_write(): Hello, world!\n", 32);
+
+		printf("result of write(): %d\n", result0);
+		printf("result of ft_write(): %d\n", result1);
+
+		printf("\n...yeah, it should be broken then...\n");
+	}
+	
+	printf("----\n");
+	
+	/* ft_read
+	 * */
+	{
+		char	buf0[16],
+				buf1[16];
+		int		result0,
+				result1;
+
+		result0 = read(0, buf0, 16);
+		result1 = ft_read(0, buf1, 16);
+
+		printf("result of read(): %s", buf0);
+		printf("result of ft_read(): %s", buf1);
+	}
 	
 	return (0);
 }
