@@ -10,10 +10,12 @@ ft_strlen:
 
 	mov rax, 0				; register size_t result;
 .L2:
-	inc rax					; result++;
 	cmp byte [rdi + rax], 0	; while (*(s + result))
-	jne .L2
+	je .L3
+	inc rax					; result++;
+	jmp .L2
 
+.L3:
 	; stack dispose
 	pop rbp
 	ret
