@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 #include <unistd.h>
 
 extern size_t ft_strlen(const char *s);
@@ -30,26 +31,154 @@ int main(void) {
 }
 
 static int __test_ft_strlen(void) {
+    printf("=== TEST: ft_strlen ===\n");
+
+    /* 1. Hello, world! */
+    do {
+        const char *str = "Hello, world!";
+        size_t len = ft_strlen(str);
+
+        printf("ft_strlen(%s) : %zu\n", str, len);
+    } while (0);
+    
+    /* 2. Empty */
+    do {
+        const char *str = "";
+        size_t len = ft_strlen(str);
+
+        printf("ft_strlen(%s) : %zu\n", str, len);
+    } while (0);
+    
+    /* 3. Long */
+    do {
+        const char *str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        size_t len = ft_strlen(str);
+
+        printf("ft_strlen(%s) : %zu\n", str, len);
+    } while (0);
     return (1);
 }
 
 static int __test_ft_strcpy(void) {
+    printf("=== TEST: ft_strcpy ===\n");
+
+    /* 1. ... */
+    do {
+    } while (0);
     return (1);
 }
 
 static int __test_ft_strcmp(void) {
+    printf("=== TEST: ft_strcmp ===\n");
+
+    /* 1. Two same */
+    do {
+        const char *str0 = "Hello, World!",
+                   *str1 = "Hello, World!";
+
+        printf("ft_strcmp(%s, %s) : %d\n", str0, str1, ft_strcmp(str0, str1));
+    } while (0);
+
+    /* 2. One string */
+    do {
+        const char *str0 = "Hello, World!";
+
+        printf("ft_strcmp(%s, %s) : %d\n", str0, str0, ft_strcmp(str0, str0));
+    } while (0);
+
+    /* 3. Difference no. 1 */
+    do {
+        const char *str0 = "Hello, World!",
+                   *str1 = "Lorem ipsum dolor sit amet";
+
+        printf("ft_strcmp(%s, %s) : %d\n", str0, str1, ft_strcmp(str0, str1));
+    } while (0);
+    
+    /* 4. Difference no. 2 */
+    do {
+        const char *str0 = "Hello, World!",
+                   *str1 = "Hello, world!";
+
+        printf("ft_strcmp(%s, %s) : %d\n", str0, str1, ft_strcmp(str0, str1));
+    } while (0);
+    
+    /* 5. Difference no. 3 */
+    do {
+        const char *str0 = "Hello, World!",
+                   *str1 = "Hello, World";
+
+        printf("ft_strcmp(%s, %s) : %d\n", str0, str1, ft_strcmp(str0, str1));
+    } while (0);
+
+    /* 6. One empty */
+    do {
+        const char *str0 = "Hello, World!",
+                   *str1 = "";
+
+        printf("ft_strcmp(%s, %s) : %d\n", str0, str1, ft_strcmp(str0, str1));
+    } while (0);
+
+    /* 6. Two empty */
+    do {
+        const char *str0 = "",
+                   *str1 = "";
+
+        printf("ft_strcmp(%s, %s) : %d\n", str0, str1, ft_strcmp(str0, str1));
+    } while (0);
     return (1);
 }
 
 static int __test_ft_write(void) {
-    ft_write(1, "Hello, world!\n", 16);
+    printf("=== TEST: ft_write ===\n");
+    
+    /* 1. stdout */
+    do {
+        if (ft_write(1, "Hello, World!\n", 14) == -1) {
+            perror("ft_write");
+        }
+    } while (0);
+    
+    /* 2. Non-existing file */
+    do {
+        if (ft_write(42, "Hello, World!\n", 14) == -1) {
+            perror("ft_write");
+        }
+    } while (0);
+    
+    /* 3. Valid file */
+    do {
+        int fd = open("text.txt", O_CREAT | O_WRONLY, 0644);
+        if (fd == -1) { perror("open"); break; }
+        if (ft_write(fd, "Hello, World!\n", 14) == -1) {
+            perror("ft_write");
+        }
+        
+        close(fd);
+    } while (0);
     return (1);
 }
 
 static int __test_ft_read(void) {
-    return (1);
+    printf("=== TEST: ft_read ===\n");
+
+    /* 1. ... */
+    do {
+    } while (0);
+   return (1);
 }
 
 static int __test_ft_strdup(void) {
+    printf("=== TEST: ft_strdup ===\n");
+
+    /* 1. Valid string */
+    do {
+        const char *s0 = "Hello, world!\n";
+              char *s1 = ft_strdup(s0);
+
+        if (!s1) { perror("ft_strdup"); }
+        else {
+            printf("%s", s1), free(s1);
+        }
+    } while (0);
     return (1);
 }

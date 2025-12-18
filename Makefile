@@ -10,7 +10,7 @@ AR		= ar
 CC		= cc
 ASFLAGS	= -felf64 -g
 ARFLAGS = rcs
-CFLAGS  = -Wall -Wextra -Werror -std=c11 -ggdb3 -no-pie
+CFLAGS  = -Wall -Wextra -Werror -ggdb3
 
 # ========
 

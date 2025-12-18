@@ -2,16 +2,23 @@ section .text
 
 global ft_strcpy
 
-; rdi -> char *dst
-; rsi -> const char *src
+; ----------------------------------------- ;
+; strcpy - copy or catenate a string        ;
+; ----------------------------------------- ;
+; Input:                                    ;
+; > rdi = char *dst                         ;
+; > rsi = const char *src                   l
+; ----------------------------------------- ;
+; Output:                                   ;
+; > rax = pointer to dst                    ;
+; ----------------------------------------- ;
 ft_strcpy:
-	mov rax, 0					; register size_t i = 0
+	mov rax, 0
 .L2:
-	mov rbx, qword [rsi + rax]	; *(src + i)
-	mov qword [rdi + rax], rbx	; *(dst + i)
-
-	inc rax						; i++;
-	cmp byte [rsi + rax], 0		; while (*(src + i))
+	mov rbx, qword [rsi + rax]
+	mov qword [rdi + rax], rbx
+	inc rax
+	cmp byte [rsi + rax], 0
 	jne .L2
-
-	mov rax, rdi				; return (dst);
+	mov rax, rdi
+    ret

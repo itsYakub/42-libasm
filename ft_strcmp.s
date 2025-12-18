@@ -2,27 +2,29 @@ section .text
 
 global ft_strcmp
 
-; rdi -> const char *s1
-; rsi -> const char *s2
+; ----------------------------------------- ;
+; strcmp - compare two strings              ;
+; ----------------------------------------- ;
+; Input:                                    ;
+; > rdi = const char *s1                    ;
+; > rsi = const char *s2                    ;
+; ----------------------------------------- ;
+; Output:                                   ;
+; > rax = difference between s1 and s2      ;
+; ----------------------------------------- ;
 ft_strcmp:
-	; variables setup
-	mov rax, 0					; register size_t i;
-
+	mov rax, 0
 .L2:
-	mov bl, byte [rdi + rax]	; *(s1 + i)
-	mov cl, byte [rsi + rax]	; *(s2 + i)
+	mov bl, byte [rdi + rax]
+	mov cl, byte [rsi + rax]
 	cmp bl, cl
-	jne .L3
-
-	inc rax						; i++;
-	
-	cmp byte [rdi + rax], 0		; while (*(s1 + result))
+	jne .L1
+	inc rax
+	cmp byte [rdi + rax], 0
 	jne .L2
-	
-	cmp byte [rsi + rax], 0		; while (*(s2 + result))
+	cmp byte [rsi + rax], 0
 	jne .L2
-
-.L3:
-	mov rax, rbx				; *(s1 + i)
-	sub rax, rcx				; *(s2 + i)
+.L1:
+	mov rax, rbx
+	sub rax, rcx
 	ret
