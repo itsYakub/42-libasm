@@ -1,8 +1,3 @@
-/* TODO(@joleksia):
- * - [ ] finish all the functions;
- * - [ ] setup errno
- * */
-
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -16,88 +11,45 @@ extern ssize_t ft_write(int fd, const void *buf, size_t count);
 extern ssize_t ft_read(int fd, void *buf, size_t count);
 extern char *ft_strdup(const char *s);
 
+static int __test_ft_strlen(void);
+static int __test_ft_strcpy(void);
+static int __test_ft_strcmp(void);
+static int __test_ft_write(void);
+static int __test_ft_read(void);
+static int __test_ft_strdup(void);
+
 int main(void) {
-	printf("----\n");
+    __test_ft_strlen();
+    __test_ft_strcpy();
+    __test_ft_strcmp();
+    __test_ft_write();
+    __test_ft_read();
+    __test_ft_strdup();
 
-	/* ft_strlen
-	 * */
-	{
-		printf("strlen: %zu\n", strlen("Hello, world!"));
-		printf("ft_strlen: %zu\n", ft_strlen("Hello, world!"));
-	}
+    return (0);
+}
 
-	printf("----\n");
+static int __test_ft_strlen(void) {
+    return (1);
+}
 
-	/* ft_strcpy
-	 * */
-	{
-		const char	src0[16] = "Hello, world!",
-					src1[16] = "Hello, world!";
-		char		dst0[16],
-					dst1[16];
+static int __test_ft_strcpy(void) {
+    return (1);
+}
 
-		printf("strcpy(dst0, src0) = %s\n", strcpy(dst0, src0));
-		printf("ft_strcpy(dst1, src1) = %s\n", ft_strcpy(dst1, src1));
-	}
-	
-	printf("----\n");
-	
-	/* ft_strcmp
-	 * */
-	{
-		const char	s1[16] = "Hello, Word!",
-					s2[16] = "Hello, world!";
+static int __test_ft_strcmp(void) {
+    return (1);
+}
 
-		printf("strcmp(s1, s2) = %i\n", strcmp(s1, s2));
-		printf("ft_strcmp(s1, s2) = %i\n", ft_strcmp(s1, s2));
-	}
-	
-	printf("----\n");
-	
-	/* ft_write
-	 * */
-	{
-		int result0,
-			result1;
+static int __test_ft_write(void) {
+    ft_write(1, "Hello, world!\n", 16);
+    return (1);
+}
 
-		result0 = write(1, "write(): Hello, world!\n", 32);
-		result1 = ft_write(1, "ft_write(): Hello, world!\n", 32);
+static int __test_ft_read(void) {
+    return (1);
+}
 
-		printf("result of write(): %d\n", result0);
-		printf("result of ft_write(): %d\n", result1);
-
-		printf("\n...yeah, it should be broken then...\n");
-	}
-	
-	printf("----\n");
-	
-	/* ft_read
-	 * */
-	{
-		char	buf0[16],
-				buf1[16];
-		int		result0,
-				result1;
-
-		result0 = read(0, buf0, 16);
-		result1 = ft_read(0, buf1, 16);
-
-		printf("result of read(): %s", buf0);
-		printf("result of ft_read(): %s", buf1);
-	}
-	
-	printf("----\n");
-
-	/* ft_strdup
-	 * */
-	{
-		const char	*s1 = "Hello, world!";
-		char		*s2;
-
-		s2 = strdup(s1);
-		printf("strdup(): %s\n", s2), free(s2);
-		s2 = ft_strdup(s1);
-		printf("ft_strdup(): %s\n", s2), free(s2);
-	}
-	return (0);
+static int __test_ft_strdup(void) {
+    return (1);
 }

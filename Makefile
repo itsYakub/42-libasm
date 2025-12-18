@@ -1,13 +1,36 @@
-AS		:= nasm
-ASFLAGS	:= -felf64 -g
-SRCS	:= ./ft_read.s ./ft_strcmp.s ./ft_strcpy.s ./ft_strdup.s ./ft_strlen.s ./ft_write.s
-OBJS	:= $(SRCS:.s=.o)
-NAME	:= ./libasm.a
+# ========
+
+MK_ROOT		= $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
+MK_NAME		= $(MK_ROOT)libasm
+
+# ========
+
+AS		= nasm
+AR		= ar
+CC		= cc
+ASFLAGS	= -felf64 -g
+ARFLAGS = rcs
+CFLAGS  = -Wall -Wextra -Werror -std=c11 -ggdb3 -no-pie
+
+# ========
+
+OBJS	= $(SRCS:.s=.o)
+SRCS	= $(MK_ROOT)ft_read.s 	\
+		  $(MK_ROOT)ft_strcmp.s \
+		  $(MK_ROOT)ft_strcpy.s \
+		  $(MK_ROOT)ft_strdup.s \
+		  $(MK_ROOT)ft_strlen.s \
+		  $(MK_ROOT)ft_write.s
+
+# ========
+
+NAME	= $(MK_NAME).a
 
 # ========
 
 $(NAME) : $(OBJS)
-	ar rcs $@ $^
+	$(AR) $(ARFLAGS) $@ $^
+
 
 $(OBJS) : %.o : %.s
 	$(AS) $(ASFLAGS) $< -o $@
@@ -18,16 +41,28 @@ $(OBJS) : %.o : %.s
 
 all : $(NAME)
 
+
 .PHONY : re
 
-re : fclean re
+re : fclean all
+
 
 .PHONY : clean
 
 clean :
 	rm -f $(OBJS)
 
+
 .PHONY : fclean
 
-fclean: clean
+fclean : clean
 	rm -f $(NAME)
+
+# ========
+
+.PHONY : example
+
+example : $(NAME)
+	$(CC) $(CFLAGS) $(MK_ROOT)example.c $^
+
+# ========

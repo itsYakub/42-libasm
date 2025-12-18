@@ -8,10 +8,6 @@ global ft_strdup
 
 ; rdi -> const char *s
 ft_strdup:
-	; stack setup
-	push rbp
-	mov rbp, rsp
-
 	; preserve 's'
 	mov rbx, rdi
 
@@ -24,7 +20,5 @@ ft_strdup:
 	mov rdi, rax
 	mov rsi, rbx
 	call ft_strcpy
-
-	; stack dispose
-	pop rbp
-	ret
+	
+    ret

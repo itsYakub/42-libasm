@@ -5,10 +5,6 @@ global ft_strcpy
 ; rdi -> char *dst
 ; rsi -> const char *src
 ft_strcpy:
-	; stack setup
-	push rbp
-	mov rbp, rsp
-
 	mov rax, 0					; register size_t i = 0
 .L2:
 	mov rbx, qword [rsi + rax]	; *(src + i)
@@ -19,7 +15,3 @@ ft_strcpy:
 	jne .L2
 
 	mov rax, rdi				; return (dst);
-
-	; stack dispose
-	pop rbp
-	ret

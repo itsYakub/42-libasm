@@ -5,10 +5,6 @@ global ft_strcmp
 ; rdi -> const char *s1
 ; rsi -> const char *s2
 ft_strcmp:
-	; stack setup
-	push rbp
-	mov rbp, rsp
-
 	; variables setup
 	mov rax, 0					; register size_t i;
 
@@ -29,8 +25,4 @@ ft_strcmp:
 .L3:
 	mov rax, rbx				; *(s1 + i)
 	sub rax, rcx				; *(s2 + i)
-								; return (*(s1 + i) - *(s2 + 1));
-
-	; stack dispose
-	pop rbp
 	ret
