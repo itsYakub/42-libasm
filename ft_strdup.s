@@ -25,19 +25,15 @@ ft_strdup:
 	mov rdi, rax
 	call malloc WRT ..plt
     ; errno
-	cmp rax, 0
-	jl .L2
+	jc .L1
     ; ft_strcpy
-	pop rsi
 	mov rdi, rax
+	pop rsi
 	call ft_strcpy
-.L1:	
     ret
-.L2:
-    pop rdi
-	neg rax
-	push rax
+.L1:
+	mov r15, rax
 	call __errno_location WRT ..plt
-	pop rax
+    mov [rax], r15
 	mov rax, -1
-    jmp .L1
+    ret

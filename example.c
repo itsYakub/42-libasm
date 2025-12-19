@@ -62,8 +62,21 @@ static int __test_ft_strlen(void) {
 static int __test_ft_strcpy(void) {
     printf("=== TEST: ft_strcpy ===\n");
 
-    /* 1. ... */
+    /* 1. Hello, World! */
     do {
+        char dst[16] = { 0 };
+        const char *src = "Hello, World!";
+
+        ft_strcpy(dst, src);
+        printf("src: %s, dst = %s\n", src, dst);
+    } while (0);
+    
+    /* 2. String literal */
+    do {
+        char dst[16] = { 0 };
+
+        ft_strcpy(dst, "Hello, world!");
+        printf("src: %s, dst = %s\n", "Hello, world!", dst);
     } while (0);
     return (1);
 }

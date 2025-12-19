@@ -13,18 +13,18 @@ global ft_strcmp
 ; > rax = difference between s1 and s2      ;
 ; ----------------------------------------- ;
 ft_strcmp:
-	mov rax, 0
-.L2:
-	mov bl, byte [rdi + rax]
-	mov cl, byte [rsi + rax]
-	cmp bl, cl
-	jne .L1
-	inc rax
-	cmp byte [rdi + rax], 0
-	jne .L2
-	cmp byte [rsi + rax], 0
-	jne .L2
+    xor rax, rax
 .L1:
-	mov rax, rbx
-	sub rax, rcx
-	ret
+    mov al, byte [ rdi ]
+    cmp al, byte [ rsi ]
+    jne .L2
+    cmp al, 0
+    je .L3
+    inc rdi
+    inc rsi
+    jmp .L1
+.L2:
+    movzx rcx, byte [ rsi ]
+    sub rax, rcx
+.L3:
+    ret
