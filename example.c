@@ -174,10 +174,46 @@ static int __test_ft_write(void) {
 static int __test_ft_read(void) {
     printf("=== TEST: ft_read ===\n");
 
-    /* 1. ... */
+    /* 1. stdin */
     do {
+        char input[32];
+
+        if (ft_read(0, input, 32) == -1) {
+            perror("ft_read");
+        }
     } while (0);
-   return (1);
+    
+    /* 2. Non-existing file */
+    do {
+        char input[32];
+
+        if (ft_write(42, input, 32) == -1) {
+            perror("ft_read");
+        }
+    } while (0);
+    
+    /* 3. No size */
+    do {
+        char input[32];
+
+        if (ft_write(0, input, 0) == -1) {
+            perror("ft_read");
+        }
+    } while (0);
+    
+    /* 4. From file descriptor */
+    do {
+        char input[32];
+        
+        int fd = open("text.txt", O_RDONLY);
+        if (fd == -1) { perror("open"); break; }
+        if (ft_read(fd, input, 32) == -1) {
+            perror("ft_read");
+        }
+        
+        close(fd);
+    } while (0);
+    return (1);
 }
 
 static int __test_ft_strdup(void) {
