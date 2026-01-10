@@ -162,7 +162,7 @@ static int __test_ft_write(void) {
     do {
         int fd = open("text.txt", O_CREAT | O_WRONLY, 0644);
         if (fd == -1) { perror("open"); break; }
-        if (ft_write(fd, "Hello, World!\n", 14) == -1) {
+        if (ft_write(fd, "Hello, World!\n", 16) == -1) {
             perror("ft_write");
         }
         
@@ -176,7 +176,7 @@ static int __test_ft_read(void) {
 
     /* 1. stdin */
     do {
-        char input[32];
+        char input[32] = { 0 };
 
         if (ft_read(0, input, 32) == -1) {
             perror("ft_read");
@@ -185,7 +185,7 @@ static int __test_ft_read(void) {
     
     /* 2. Non-existing file */
     do {
-        char input[32];
+        char input[32] = { 0 };
 
         if (ft_write(42, input, 32) == -1) {
             perror("ft_read");
@@ -194,7 +194,7 @@ static int __test_ft_read(void) {
     
     /* 3. No size */
     do {
-        char input[32];
+        char input[32] = { 0 };
 
         if (ft_write(0, input, 0) == -1) {
             perror("ft_read");
@@ -203,7 +203,7 @@ static int __test_ft_read(void) {
     
     /* 4. From file descriptor */
     do {
-        char input[32];
+        char input[32] = { 0 };
         
         int fd = open("text.txt", O_RDONLY);
         if (fd == -1) { perror("open"); break; }

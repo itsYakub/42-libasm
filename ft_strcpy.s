@@ -13,7 +13,7 @@ global ft_strcpy
 ; > rax = pointer to dst                    ;
 ; ----------------------------------------- ;
 ft_strcpy:
-	mov rax, 0
+	xor rax, rax
 .L2:
 	mov bl, [rsi + rax]
 	mov [rdi + rax], bl

@@ -17,15 +17,18 @@ global ft_read
 ; ----------------------------------------- ;
 ft_read:
     ; read
-	mov rax, 0
+	xor rax, rax
 	syscall
 	; errno
-	jc .L1
+    test rax, rax
+	js .L1
     ret
 .L1:
 	neg rax
     mov rdi, rax
+    push rdi
 	call __errno_location WRT ..plt
+    pop rdi
     mov [ rax ], rdi
 	mov rax, -1
     ret

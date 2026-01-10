@@ -12,7 +12,7 @@ global ft_strlen
 ; > rax = size of the string                ;
 ; ----------------------------------------- ;
 ft_strlen:
-	mov rax, 0
+	xor rax, rax
 .L2:
 	cmp byte [rdi + rax], 0
 	je .L3
